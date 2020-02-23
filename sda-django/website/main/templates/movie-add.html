@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static "main.css" %}">
+</head>
+<body>
+    {% if edit %}
+        <p>Edytuj film</p>
+    {% else %}
+        <p>Dodaj nowy film</p>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        <table>
+        {% csrf_token %}
+        {{ form }}
+         </table>
+
+            {% if edit %}
+                <button type="submit">Zapisz film</button>
+            {% else %}
+                <button type="submit">Dodaj film</button>
+             {% endif %}
+
+    </form>
+</body>
+</html>

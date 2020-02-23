@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista filmów</title>
+    <link rel="stylesheet" href="{% static "main.css" %}">
+</head>
+<body>
+<h1>Lista filmów</h1>
+<a href="{% url 'movie_add'  %}">Dodaj nowy film</a>
+<ul>
+    {% for movie in movies %}
+        <li>{{ movie.title|upper }} - {{  movie.year }} -
+            MPAA {{ movie.get_mpaa_rating_display }} -
+
+            {% if movie.poster|length > 0 %}
+            <a href="/media/{{ movie.poster}}" target="_blank">Poster</a>
+            {% endif %}
+
+        </li>
+        <p>{{ movie.description }}</p>
+
+        <p>
+            Aktorzy:
+            <ul>
+                {% for actor in movie.actors.all %}
+                    <li>{{ actor }}</li>
+                {% endfor %}
+            </ul>
+        </p>
+        <!--
+        <a href="/movieedit/{{ movie.id }}">Edytuj</a>
+        -->
+        <a href="{% url 'movie_edit' movie.id %}">Edytuj</a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="{% url 'movie_del' movie.id %}">Usuń</a>
+        <p></p>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
