@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static "main.css" %}">
+</head>
+<body>
+    <h1>Szczegóły filmu</h1>
+    <p>{{ movie.title|title }}</p>
+    <p>{{ movie.description }}</p>
+    <p>
+        Aktorzy:
+        <ul>
+            {% for actor in movie.actors.all %}
+                <li>{{ actor }}</li>
+            {% endfor %}
+        </ul>
+    </p>
+
+    <p>
+        Komentarze:
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment.body }} - l.gwiazdek: {{  comment.stars }}</li>
+            {% endfor %}
+        </ul>
+    </p>
+
+    <a href="{% url 'movie_list' %}">Lista filmów</a>
+</body>
+</html>

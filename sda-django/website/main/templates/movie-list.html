@@ -8,6 +8,21 @@
 </head>
 <body>
 <h1>Lista filmów</h1>
+
+{# komentarz #}
+
+{% if user.is_authenticated %}
+    <p>
+        <b>Jesteś zalogowany, witaj {{ user.username }}</b>
+        <a href="{% url 'logout' %}">Logout</a>
+    </p>
+{% else %}
+    <p>
+        <b>Nie jesteś zalogowany</b>
+        <a href="{% url 'login' %}">Login</a>
+    </p>
+{% endif %}
+
 <a href="{% url 'movie_add'  %}">Dodaj nowy film</a>
 <ul>
     {% for movie in movies %}
@@ -35,6 +50,8 @@
         <a href="{% url 'movie_edit' movie.id %}">Edytuj</a>
         &nbsp;&nbsp;&nbsp;
         <a href="{% url 'movie_del' movie.id %}">Usuń</a>
+
+        <a href="{% url 'movie_details' movie.id %}">Szczegóły</a>
         <p></p>
     {% endfor %}
 </ul>

@@ -1,6 +1,24 @@
 from django.db import models
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
+
+# przyklad relacji jeden-do-wielu (one-2-many)
+class Comment(models.Model):
+    body = models.TextField()
+    stars = models.IntegerField(default=1,
+                                validators=[MinValueValidator(1),
+                                            MaxValueValidator(5)])
+    created = models.DateTimeField(auto_now_add=True)
+    movie = models.ForeignKey("Movie", on_delete=models.CASCADE)
+
+class Director(models.Model):
+    first_name = models.CharField(max_length=100, null=False)
+    last_name = models.CharField(max_length=100, null=False)
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+    class Meta:
+        verbose_name = "reżyser"
+        verbose_name_plural = "reżyserzy"
 
 class Actor(models.Model):
     first_name = models.CharField(max_length=100, null=False)

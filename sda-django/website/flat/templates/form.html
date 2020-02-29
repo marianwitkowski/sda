@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    body {
+        font-family: Helvetica;
+    }
+
+    .errorlist > li {
+        color : red;
+    }
+
+</style>
+
+<form method="post" action="">
+    <table cellspacing="30">
+        {% csrf_token %}
+        {{ form }}
+    </table>
+    <button type="submit">Szukaj</button>
+</form>
+
+<p></p>
+<table cellpadding="5">
+    {% for row in result %}
+        <tr>
+            <td width="400">
+                <a href="{{row.url}}" target="_blank">{{ row.title }}</a>
+            </td>
+            <td width="100">{{ row.rooms }}</td>
+            <td width="100">{{ row.price }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

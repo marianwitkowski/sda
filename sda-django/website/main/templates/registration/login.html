@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static "main.css" %}">
+</head>
+<body>
+<form action="" method="post">
+    <table>
+        {% csrf_token %}
+        {{ form.as_table }}
+    </table>
+    <button type="submit">Zaloguj się</button>
+</form>
+</body>
+</html>

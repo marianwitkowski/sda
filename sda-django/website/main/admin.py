@@ -11,3 +11,5 @@ class MovieAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
 
 admin.site.register(Actor)
+admin.site.register(Director)
+admin.site.register(Comment)

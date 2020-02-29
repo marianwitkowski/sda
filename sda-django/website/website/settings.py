@@ -25,7 +25,7 @@ SECRET_KEY = '889#l-kov9-i7nvs#@%9by!#lo6&6k@9=ez!sy*tw_c8_$baw)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost','.herokuapp.com']
 
 
 # Application definition
@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main'
+    'main',
+    'flat',
+    'import_export'
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'website.urls'
@@ -123,3 +126,13 @@ STATIC_URL = '/static/'
 # deklaracja miejsca składowania plików typu media file i URLu do nich
 MEDIA_ROOT = "main/media_folder"
 MEDIA_URL = "/media/"
+
+# URL na potrzeby na logowania / wylogowania użytkownika
+LOGIN_URL = "/login"  # kontrolka logowania
+LOGIN_REDIRECT_URL = "movie_list" # domyślny URL po logowaniu
+LOGOUT_REDIRECT_URL = "/logout-done" # URL po operacji wylogowania user'a
+
+import dj_database_url
+prod_db = dj_database_url.config(conn_max_age=500)
+DATABASES["default"].update(prod_db)
+
